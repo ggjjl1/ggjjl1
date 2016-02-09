@@ -1,1 +1,5 @@
-a style or attitude or force of me.
+# 这是我的网站的源代码
+* 使用 Python 语言开发
+* 使用了 Flask Web 框架
+* 数据库使用 MySQL
+* 个人博客也会放在这个网站上面

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>{{ blog_name }}</title>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.jpg') }}">
+	<link rel="stylesheet" href="static/bootstrap-3.3.5/dist/css/bootstrap.css" />
+	<link rel="stylesheet" href="static/css/style.css" />
+	<script src="static/bootstrap-3.3.5/dist/js/jquery-1.11.3.js"></script>
+	<script src="static/bootstrap-3.3.5/dist/js/bootstrap.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("button").click(function(){
+			title = $("#title").val();
+			content = $("#content").val();
+			$.post("/write",
+			{
+				title: title,
+				content: content
+			});
+	    });
+	});
+	</script>
+</head>
+<body>
+	<div class="head">
+		<div class="logo">gjl's blog</div>
+	</div>
+	<div class="content">
+	  <div class="write-area">
+        <form action="/write/" method="post">
+		    <input class="input-title" type="text" id="title" name="title" />
+		    <br>
+		    <textarea class="input-content" id="content" name="content">此处填入文章内容.</textarea>
+		    <br>
+		    <input type="submit" value="提交" />
+		</form>
+		</div>
+	</div>
+	<div class="footer"></div>
+</body>
+</html>
