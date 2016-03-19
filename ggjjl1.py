@@ -12,7 +12,7 @@ blog_name = "gjl's website."
 logo_name = blog_name
 
 #打开数据库连接
-db = MySQLdb.connect(host="123.56.179.65",user="huiyi",passwd="huiyi0331",db="gjl_website", charset="utf8")
+db = MySQLdb.connect(host="localhost",user="root",passwd="123456",db="ggjjl1", charset="utf8")
 cursor = db.cursor()
 cursor.execute("select version()")
 data = cursor.fetchone()
