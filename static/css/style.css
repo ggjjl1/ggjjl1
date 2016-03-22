@@ -1,6 +1,8 @@
 body {
-	font-family: "Hiragino Sans GB","Microsoft YaHei","微软雅黑",Georgia,tahoma,arial,simsun,"宋体";
-	font-size: 15px;
+    font-family: "Hiragino Sans GB","Microsoft YaHei","微软雅黑",Georgia,tahoma,arial,simsun,"宋体";
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
 }
 
 .navbar-gjl {
@@ -16,7 +18,6 @@ body {
 .logo{
 	color: #ffffff;
 	font-size: 25px;
-	margin-top: 5px;
 }
 
 .content .text-card {
