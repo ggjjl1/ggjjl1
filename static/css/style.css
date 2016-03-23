@@ -18,11 +18,11 @@ body {
 .logo{
 	color: #ffffff;
 	font-size: 25px;
+	line-height: 50px;
 }
 
 .content .text-card {
 	width: 100%;
-	height:180px;
 	/*border-style: solid 2px;*/
 	background-color: #ddd;
 	margin: 10px;
