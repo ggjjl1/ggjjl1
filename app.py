@@ -1,26 +1,55 @@
 #usr/bin/env python
 # -*- coding: utf-8 -*-
+import os
 import sys
 import time
+import datetime
 import MySQLdb
 from flask import Flask, render_template, request, redirect, url_for, jsonify
+from ggjjl1 import db
 
 app = Flask(__name__)
 
-#网站名称
+"""
+网站名称
+"""
 blog_name = "gjl's website."
 logo_name = blog_name
 
-#打开数据库连接
-db = MySQLdb.connect(host="localhost",user="root",passwd="123456",db="ggjjl1", charset="utf8")
-cursor = db.cursor()
-cursor.execute("select version()")
-data = cursor.fetchone()
-print "database's version is: %s." % data
+
+"""
+将时间戳转换为日期
+"""
+def stamp2date(timestamp):
+    return datetime.datetime.utcfromtimestamp(timestamp).strftime("%Y-%m-%d")
+
+print stamp2date(int(time.time()))
+
+
+"""
+从数据库中获取最新的文章
+"""
+def get_articles():
+    conn = db.connect_db()
+    cursor = conn.cursor()
+    try:
+        # 执行 sql 语句
+        print("开始获取数据库中的文章")
+        cursor.execute("select id,title,content,tag,user_id,ctime from article where valid=1")
+        articles  = [dict(id=row[0], title=row[1], content=row[2], tag=row[3], user_id=row[4], ctime=row[5]) for row in cursor.fetchall()]
+        # 释放数据库连接
+        cursor.close()
+        db.close()
+    except:
+        print("查询数据库失败")
+    return articles
+
+
 
 @app.route('/')
 def index():
-    return render_template('index.html', blog_name=blog_name, logo_name=logo_name)
+    articles = get_articles()
+    return render_template('index.html', blog_name=blog_name, logo_name=logo_name, articles=articles)
 
 @app.route('/post/')
 def show_post():
