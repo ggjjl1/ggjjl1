@@ -1,7 +1,6 @@
-# 这是我的网站的源代码
-* 使用 Python 语言开发
-* 使用了 Flask Web 框架
-* 数据库使用 MySQL
-* 个人博客也会放在这个网站上面
-===
-# 上面的内容废弃掉，决定自己动手写一个简单的 web server.
+# 用作个人网站的源代码
+* 使用 Python 语言
+* 使用 Flask Web 框架
+* ORM 使用 SQLAlchemy 框架
+* MySQL 数据库
+* 主要用来写写个人博客

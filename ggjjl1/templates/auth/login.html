@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    登录
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>登录</h1>
+        <form method="post">
+            <table>
+                <tr>
+                    <td>
+                        <label for="username">用户名</label>
+                    </td>
+                    <td>
+                        <input name="username" id="username" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="password">密码</label></td>
+                    <td>
+                        <input type="password" name="password" id="password" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="登录">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+{% endblock %}

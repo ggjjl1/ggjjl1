@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ article.title }}
+{% endblock %}
+
+{% block content %}
+    <article class="container">
+    <div class="article-header">
+        <h3>{{ article.title }}</h3>
+        <p><strong>更新于：</strong>{{ article.update_time | formatdatetime }}</p>
+    </div>
+    <div class="article-entry">
+        {{ article.content }}
+    </div>
+    </article>
+{% endblock %}
