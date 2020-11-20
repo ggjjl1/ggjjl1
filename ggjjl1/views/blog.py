@@ -1,56 +1,59 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import functools
 
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for
 )
 from werkzeug.exceptions import abort
 from jinja2 import TemplateNotFound
-from flask_paginate import Pagination, get_page_parameter
 
-from ggjjl1.database import init_db, db_session
-from ggjjl1.models import Article
+from ggjjl1.database import db
+from ggjjl1.models import Post
 from ggjjl1 import settings
 
 bp = Blueprint('blog', __name__)
 
 
+def login_required(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user is None:
+            return redirect(url_for("auth.login"))
+
+        return view(**kwargs)
+
+    return wrapped_view
+
+
 @bp.route('/')
 def index():
-    page = request.args.get(get_page_parameter(), default=1, type=int)
-    articles = Article.query.all()
-    pagination = Pagination(
-        page=page, total=len(articles), record_name='articles', bs_version="3_3", alignment='center'
-    )
+    page = request.args.get('page', 1, type=int)
+    pagination = Post.query.order_by(
+        Post.create_time.desc()
+    ).paginate(page, per_page=5, error_out=True)
     try:
-        return render_template(
-            'blog/index.html',
-            articles=articles,
-            pagination=pagination,
-            title=settings.SITE_NAME,
-            logo_name=settings.LOGO_NAME
-        )
+        return render_template('blog/index.html', pagination=pagination)
     except TemplateNotFound:
         abort(404)
 
 
-@bp.route('/article/<int:id>')
+@bp.route('/post/<int:id>')
 def detail(id):
-    article = Article.query.filter(Article.id == id).first()
+    post = Post.query.filter(Post.id == id).first()
 
     return render_template(
         'blog/detail.html',
-        article=article,
-        title=settings.SITE_NAME,
-        logo_name=settings.LOGO_NAME
+        post=post,
     )
 
 
-@bp.route('/post', methods=('GET', 'POST'))
-def post():
+@bp.route('/create', methods=('GET', 'POST'))
+@login_required
+def create():
     if request.method == 'POST':
         title = request.form['title']
-        content = request.form['content']
+        body = request.form['body']
         error = None
 
         if not title:
@@ -59,12 +62,11 @@ def post():
         if error is not None:
             flash(error)
         else:
-            article = Article(title, content, author=1)
-            db_session.add(article)
-            db_session.commit()
+            p = Post(title, body, author_id=1)
+            db.session.add(p)
+            db.session.commit()
             return redirect(url_for('blog.index'))
 
     return render_template(
-        'blog/post.html',
-        logo_name=settings.LOGO_NAME
+        'blog/create.html'
     )

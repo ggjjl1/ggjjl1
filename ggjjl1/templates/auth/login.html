@@ -6,30 +6,21 @@
 
 {% block content %}
     <div class="container">
-        <h1>登录</h1>
-        <form method="post">
-            <table>
-                <tr>
-                    <td>
-                        <label for="username">用户名</label>
-                    </td>
-                    <td>
-                        <input name="username" id="username" required>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="password">密码</label></td>
-                    <td>
-                        <input type="password" name="password" id="password" required>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="submit" value="登录">
-                    </td>
-                </tr>
-            </table>
+        <h3>登录</h3>
+        <form method="post" style="width: 300px;">
+            <div class="form-group">
+                <label for="name">用户名</label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div>
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" class="form-control" id="password" name="password">
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="keep-login">
+                <label class="form-check-label" for="keep-login">保持登录</label>
+            </div>
+            <button type="submit" class="btn btn-primary">登录</button>
         </form>
     </div>
 {% endblock %}

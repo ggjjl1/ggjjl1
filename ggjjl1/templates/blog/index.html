@@ -1,26 +1,20 @@
 {% extends "base.html" %}
+{% from 'blog/paginator.html' import render_pagination %}
 
 {% block title %}首页{% endblock %}
 
 {% block content %}
     <div class="container">
-        {% for article in articles %}
-            <div class="text-card">
-                <div class="post-title">
-                    <h3><a href="/article/{{ article['id'] }}">{{ article['title'] }}</a></h3>
-                </div>
-                <div class="post-time">
-                    <p>
-                        <b>发布时间:&nbsp;</b>
-                        <span>{{ article['create_time'] | formatdatetime }}</span>
-                    </p>
-                </div>
-                <div class="post-intro">
-                    <p class="line-limit-length">{{ article['content'] }}</p>
+        {% for post in pagination.items %}
+            <div class="card vertical-gap20">
+                <div class="card-body">
+                    <h3 class="card-title"><a href="/post/{{ post['id'] }}">{{ post['title'] }}</a></h3>
+                    <p class="card-text">{{ post['body'] }}</p>
+                    <p class="card-text"><small class="text-muted">{{ post['create_time'] }}</small></p>
                 </div>
             </div>
         {% endfor %}
-        {{ pagination.links }}
+        {{ render_pagination(pagination, 'index') }}
     </div>
 {% endblock %}
 

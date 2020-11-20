@@ -21,5 +21,5 @@ def format_datetime(value, format="%d %b %Y %I:%M %p"):
 
 app.jinja_env.filters['formatdatetime'] = format_datetime
 
-if __name__ == '__main__':
-    app.run(host="0.0.0.0")
+# if __name__ == '__main__':
+#     app.run(host="0.0.0.0")

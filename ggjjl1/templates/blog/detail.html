@@ -1,17 +1,15 @@
 {% extends "base.html" %}
 
 {% block title %}
-    {{ article.title }}
+    {{ post.title }}
 {% endblock %}
 
 {% block content %}
-    <article class="container">
-    <div class="article-header">
-        <h3>{{ article.title }}</h3>
-        <p><strong>更新于：</strong>{{ article.update_time | formatdatetime }}</p>
-    </div>
-    <div class="article-entry">
-        {{ article.content }}
-    </div>
+    <article class="card container vertical-gap20">
+        <div class="card-body">
+            <h3 class="card-title">{{ post.title }}</h3>
+            <p>{{ post.body }}</p>
+            <p class="card-text"><small class="text-muted">{{ post.update_time }}</small></p>
+        </div>
     </article>
 {% endblock %}

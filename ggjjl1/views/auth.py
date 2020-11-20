@@ -7,7 +7,7 @@ from flask import (
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from ggjjl1.database import db_session
+from ggjjl1.database import db
 from ggjjl1.models import User
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
@@ -16,7 +16,7 @@ bp = Blueprint('auth', __name__, url_prefix='/auth')
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
     if request.method == 'POST':
-        name = request.form['username']
+        name = request.form['name']
         password = request.form['password']
         email = request.form['email']
         error = None
@@ -32,8 +32,8 @@ def register():
 
         if error is None:
             user = User(name, generate_password_hash(password), email)
-            db_session.add(user)
-            db_session.commit()
+            db.session.add(user)
+            db.session.commit()
             return redirect(url_for('auth.login'))
 
         flash(error)
@@ -44,7 +44,7 @@ def register():
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
     if request.method == 'POST':
-        name = request.form['username']
+        name = request.form['name']
         password = request.form['password']
         error = None
 
@@ -52,12 +52,12 @@ def login():
 
         if user is None:
             error = '用户名不存在！'
-        elif not check_password_hash(user['password'], password):
+        elif not user.check_password(password):
             error = '密码错误！'
 
         if error is None:
             session.clear()
-            session['user_id'] = user['id']
+            session['user_id'] = user.id
             return redirect(url_for('index'))
 
         flash(error)
@@ -68,11 +68,7 @@ def login():
 @bp.before_app_request
 def load_logged_in_user():
     user_id = session.get('user_id')
-
-    if user_id is None:
-        g.user = None
-    else:
-        g.user = User.query.filter(User.id == user_id).fetchone()
+    g.user = User.query.get(user_id) if user_id is not None else None
 
 
 @bp.route('/logout')

@@ -1,30 +1,57 @@
-##数据库建表语句##
-##create-data: 2016-03-23
+/*
+Navicat MySQL Data Transfer
 
-##--创建db
-CREATE DATABASE IF NOT EXISTS `ggjjl1` /*!40100 DEFAULT CHARACTER SET utf8 */
+Source Server         : localhost
+Source Server Version : 50636
+Source Host           : localhost:3306
+Source Database       : ggjjl1
 
-##--user表
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-  `name` VARCHAR(50) NOT NULL COMMENT '用户名',
-  `password` VARCHAR(200) NOT NULL COMMENT '密码',
-  `email` VARCHAR(120) NOT NULL COMMENT '邮箱',
-  `create_time` DATETIME NOT NULL COMMENT '创建时间',
-  `update_time` DATETIME NOT NULL COMMENT '更新时间',
+Target Server Type    : MYSQL
+Target Server Version : 50636
+File Encoding         : 65001
+
+Date: 2020-11-17 23:26:25
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for post
+-- ----------------------------
+DROP TABLE IF EXISTS `post`;
+CREATE TABLE `post` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `author_id` int(11) NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `body` text NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY (`name`),
-  UNIQUE KEY(`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
+  KEY `author_id` (`author_id`),
+  CONSTRAINT `post_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-##--article表
-CREATE TABLE IF NOT EXISTS `article` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键id',
-  `title` varchar(100) NOT NULL COMMENT '标题',
-  `content` text COMMENT '文章内容',
-  `author` int(11) NOT NULL COMMENT '用户ID',
-  `create_time` datetime NOT NULL COMMENT '创建时间',
-  `update_time` datetime NOT NULL COMMENT '更新时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章表';
+-- ----------------------------
+-- Records of post
+-- ----------------------------
 
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(80) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+SET FOREIGN_KEY_CHECKS=1;

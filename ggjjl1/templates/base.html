@@ -13,22 +13,29 @@
 <body>
 <div class="header">
     {% block header %}
-        <nav class="navbar navbar-inverse navbar-static-top">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="{{ url_for('index') }}">gjl's website.</a>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        {% if g.user %}
-                            <li><span>{{ g.user['username'] }}</span>
-                            <li><a href="{{ url_for('auth.logout') }}">登出</a>
-                                {% else %}
-                            <li><a href="{{ url_for('auth.register') }}">注册</a>
-                            <li><a href="{{ url_for('auth.login') }}">登录</a>
-                        {% endif %}
-                    </ul>
-                </div>
+                <a class="navbar-brand" href="{{ url_for("index") }}">高的博客</a>
+                <ul class="nav nav-pills">
+                    {% if g.user %}
+                        <li class="nav-item">
+                            <a class="nav-link">{{ g.user['name'] }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url_for('blog.create') }}" class="btn btn-primary btn-sm">创建</a>&nbsp;
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-light btn-sm">登出</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a href="{{ url_for('auth.register') }}" class="btn btn-outline-light btn-sm">注册</a>&nbsp;
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url_for('auth.login') }}" class="btn btn-outline-light btn-sm">登录</a>
+                        </li>
+                    {% endif %}
+                </ul>
             </div>
         </nav>
     {% endblock %}
@@ -37,7 +44,9 @@
 <div class="footer">
     {% block footer %}
         <div class="container">
-            <p>&copy; Copyright 2020 by <a href="http://ggjjl1.com/">ggjjl1.com</a>.</p>
+            <div id="footer-info">
+                <p>&copy; Copyright 2020 by <a href="http://ggjjl1.com/">ggjjl1.com</a>.</p>
+            </div>
         </div>
     {% endblock %}
 </div>

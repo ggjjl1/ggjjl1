@@ -4,33 +4,22 @@
 
 {% block content %}
     <div class="container">
-        <h1>注册</h1>
-
-        <form method="post">
-            <table>
-                <tr>
-                    <td>
-                        <label for="username">用户名</label></td>
-                    <td>
-                        <input name="username" id="username" required></td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="password">密码</label></td>
-                    <td>
-                        <input type="password" name="password" id="password" required></td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="email">邮箱</label></td>
-                    <td>
-                        <input type="email" name="email" id="email" required></td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="submit" value="注册"></td>
-                </tr>
-            </table>
+        <h3>注册</h3>
+        <form method="post" style="width: 300px;">
+            <div class="form-group">
+                <label for="name">用户名</label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div>
+            <div class="form-group">
+                <label for="name">邮箱</label>
+                <input type="email" class="form-control" id="name" name="email" aria-describedby="emailHelp">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" class="form-control" id="password" name="password">
+            </div>
+            <button type="submit" class="btn btn-primary">注册</button>
         </form>
     </div>
 {% endblock %}
