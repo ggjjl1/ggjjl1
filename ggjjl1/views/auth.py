@@ -28,10 +28,10 @@ def register():
         elif User.query.filter(
                 User.name == name or User.email == email
         ).first() is not None:
-            error = '用户或邮箱已存在！'
+            error = '用户名或邮箱已存在！'
 
         if error is None:
-            user = User(name, generate_password_hash(password), email)
+            user = User(name, password, email)
             db.session.add(user)
             db.session.commit()
             return redirect(url_for('auth.login'))
