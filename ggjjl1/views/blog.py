@@ -5,14 +5,15 @@ import functools
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for
 )
-from werkzeug.exceptions import abort
 from jinja2 import TemplateNotFound
+from werkzeug.exceptions import abort
 
+from ggjjl1 import settings
 from ggjjl1.database import db
 from ggjjl1.models import Post
-from ggjjl1 import settings
 
 bp = Blueprint('blog', __name__)
+title = settings.SITE_NAME
 
 
 def login_required(view):
@@ -38,9 +39,9 @@ def index():
         abort(404)
 
 
-@bp.route('/post/<int:id>')
-def detail(id):
-    post = Post.query.filter(Post.id == id).first()
+@bp.route('/post/<int:post_id>')
+def detail(post_id):
+    post = Post.query.filter(Post.id == post_id).first()
 
     return render_template(
         'blog/detail.html',
@@ -70,3 +71,12 @@ def create():
     return render_template(
         'blog/create.html'
     )
+
+
+@bp.route('/about')
+def about():
+    return {
+        "name": "Tim",
+        "age": 20,
+        "gender": "Male"
+    }

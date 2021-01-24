@@ -26,6 +26,9 @@ body {
     margin-bottom: 10px;
 }
 
+.content {
+}
+
 .content .text-card {
     width: 100%;
     /*border-style: solid 2px;*/
@@ -83,4 +86,8 @@ body {
 .login {
     width: 100%;
     background-color: #ddd;
+}
+
+.create {
+    padding: 15px;
 }

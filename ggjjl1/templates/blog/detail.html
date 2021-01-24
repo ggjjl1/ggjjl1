@@ -8,7 +8,9 @@
     <article class="card container vertical-gap20">
         <div class="card-body">
             <h3 class="card-title">{{ post.title }}</h3>
-            <p>{{ post.body }}</p>
+            {% autoescape false %}
+                <p style="white-space: pre-line;">{{ post.body|mkdown }}</p>
+            {% endautoescape %}
             <p class="card-text"><small class="text-muted">{{ post.update_time }}</small></p>
         </div>
     </article>
