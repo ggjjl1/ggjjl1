@@ -6,7 +6,7 @@
         <title>{% block title %}{% endblock %} - ggjjl1.com</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}"/>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
-        <script src="{{ url_for('static', filename='js/jquery-1.12.2.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery-3.5.1.js') }}"></script>
         <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
     {% endblock %}
 </head>
@@ -45,7 +45,8 @@
     {% block footer %}
         <div class="container">
             <div id="footer-info">
-                <p>&copy; Copyright 2020 by <a href="http://ggjjl1.com/">ggjjl1.com</a>.</p>
+                <p>&copy; Copyright 2020 <a href="http://ggjjl1.com/">ggjjl1.com</a></p>
+                <p>Powered by <a href="https://flask.palletsprojects.com/" target="_blank">Flask</a></p>
             </div>
         </div>
     {% endblock %}
