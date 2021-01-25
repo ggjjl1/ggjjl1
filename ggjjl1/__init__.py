@@ -1,14 +1,15 @@
-import os
-import click
 from flask import Flask
 from flask_migrate import Migrate
+
+from . import settings
+from .filter import reverse_filter, mkdown
 
 
 def create_app():
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:12345678@127.0.0.1:3306/ggjjl1'
+    app.config['SQLALCHEMY_DATABASE_URI'] = settings.SQLALCHEMY_DATABASE_URI
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-    app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "dev")
+    app.config['SECRET_KEY'] = settings.SECRET_KEY
 
     from ggjjl1.database import db
     db.init_app(app)
@@ -19,5 +20,9 @@ def create_app():
     app.add_url_rule('/', endpoint='index')
     app.add_url_rule('/auth/register', endpoint='register')
     app.add_url_rule('/auth/login', endpoint='login')
+
+    # 模板过滤器
+    app.jinja_env.filters['reverse'] = reverse_filter
+    app.jinja_env.filters['mkdown'] = mkdown
 
     return app

@@ -1,4 +1,6 @@
-Flask
+Flask==1.1.2
 Flask-SQLAlchemy
+Flask-Migrate
 PyMySQL
-Markdown
+click
+Flask-Script

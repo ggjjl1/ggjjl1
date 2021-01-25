@@ -1,15 +1,15 @@
 #!usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""
-网站名称
-"""
-SITE_NAME = "gjl's website."
-LOGO_NAME = SITE_NAME
+import os
 
+# 网站名称
+SITE_NAME = "ggjjl1's website"
 
-# 数据库连接信息
-DB_URL = "mysql://127.0.0.1"
-DB_USER = "root"
-DB_PASS = "123456"
-DB_PORT = "3306"
+# 数据库地址
+DATABASE_NAME = 'root'
+DATABASE_PASS = '12345678'
+SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:12345678@127.0.0.1:3306/ggjjl1"
+
+# Flask应用密钥
+SECRET_KEY = os.environ.get("SECRET_KEY", "dev")
