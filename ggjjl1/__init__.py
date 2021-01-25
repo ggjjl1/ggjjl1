@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_migrate import Migrate
 
 from . import settings
 from .filter import reverse_filter, mkdown
