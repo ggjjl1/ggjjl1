@@ -73,6 +73,40 @@ def create():
     )
 
 
+@bp.route("/<int:post_id>/update", methods=("POST", "GET"))
+@login_required
+def update(post_id):
+    post = Post.query.filter(Post.id == post_id).first()
+
+    if request.method == "POST":
+        title = request.form['title']
+        body = request.form['body']
+        error = None
+
+        if not title:
+            error = "Title is required."
+
+        if error is not None:
+            flash(error)
+        else:
+            post.title = title
+            post.body = body
+            db.session.commit()
+            return redirect(url_for("blog.index"))
+
+    return render_template("blog/update.html", post=post)
+
+
+@bp.route("/<int:post_id>/delete", methods=["POST",])
+@login_required
+def delete(post_id):
+    post = Post.query.filter(Post.id == post_id).first()
+    db.session.delete(post)
+    db.session.commit()
+
+    return redirect(url_for("blog.index"))
+
+
 @bp.route('/about')
 def about():
     return {
