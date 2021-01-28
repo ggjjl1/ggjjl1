@@ -97,7 +97,7 @@ def update(post_id):
     return render_template("blog/update.html", post=post)
 
 
-@bp.route("/<int:post_id>/delete", methods=["POST",])
+@bp.route("/<int:post_id>/delete", methods=["POST", ])
 @login_required
 def delete(post_id):
     post = Post.query.filter(Post.id == post_id).first()

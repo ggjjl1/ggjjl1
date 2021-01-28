@@ -5,16 +5,17 @@
 {% endblock %}
 
 {% block content %}
-    <article class="card container vertical-gap20">
-        <div class="card-body">
-            <h3 class="card-title">{{ post.title }}</h3>
-            {% autoescape false %}
-                <p style="white-space: pre-line;">{{ post.body|mkdown }}</p>
-            {% endautoescape %}
-            <p class="card-text">
-                <small class="text-muted">{{ post.update_time }}</small>
-                <small><a href="/{{ post.id }}/update">编辑</a></small>
-            </p>
-        </div>
-    </article>
+<article class="card container vertical-gap20">
+    <div class="card-body">
+        <h3 class="card-title" style="color: #c82333; font-family: SimSun, serif; font-size: 36px;">{{ post.title }}</h3>
+        <div class="redline" style="width:100%; height: 3px; background: #c82333;"></div>
+        {% autoescape false %}
+        <p style="white-space: pre-line;">{{ post.body|mkdown }}</p>
+        {% endautoescape %}
+        <p class="card-text">
+            <small class="text-muted">{{ post.update_time }}</small>
+            <small><a href="/{{ post.id }}/update">编辑</a></small>
+        </p>
+    </div>
+</article>
 {% endblock %}
