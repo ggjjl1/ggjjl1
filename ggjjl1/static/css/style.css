@@ -43,6 +43,13 @@ body {
     white-space: nowrap;
 }
 
+.post-title {
+    color: #c82333;
+    font-family: SimSun, serif;
+    font-size: 36px;
+    text-align: center;
+}
+
 .article-header {
 
 }
