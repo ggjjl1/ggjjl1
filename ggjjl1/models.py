@@ -7,7 +7,6 @@ from ggjjl1.database import db
 
 
 class User(db.Model):
-
     __table_args__ = {'mysql_collate': 'utf8_general_ci'}
 
     id = db.Column(db.Integer, primary_key=True)
@@ -15,10 +14,10 @@ class User(db.Model):
     _password = db.Column("password", db.String(200), nullable=False)
     email = db.Column(db.String(100), unique=True)
     create_time = db.Column(
-        db.DateTime, nullable=False,server_default=db.func.current_timestamp()
+        db.DateTime, nullable=False, server_default=db.func.current_timestamp()
     )
     update_time = db.Column(
-        db.DateTime, nullable=False,server_default=db.func.current_timestamp()
+        db.DateTime, nullable=False, server_default=db.func.current_timestamp()
     )
 
     @hybrid_property
@@ -42,7 +41,6 @@ class User(db.Model):
 
 
 class Post(db.Model):
-
     __table_args__ = {'mysql_collate': 'utf8_general_ci'}
 
     id = db.Column(db.Integer, primary_key=True)

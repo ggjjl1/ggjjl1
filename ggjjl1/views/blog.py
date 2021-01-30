@@ -70,3 +70,12 @@ def create():
     return render_template(
         'blog/create.html'
     )
+
+
+@bp.route("/api")
+def test_api():
+    return {
+        "username": "Tim",
+        "theme": "default",
+        "image": "http://ggjjl1.com/test-image001.jpg",
+    }
