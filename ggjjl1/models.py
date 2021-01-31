@@ -10,9 +10,9 @@ class User(db.Model):
     __table_args__ = {'mysql_collate': 'utf8_general_ci'}
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), unique=True, nullable=False)
-    _password = db.Column("password", db.String(200), nullable=False)
-    email = db.Column(db.String(100), unique=True)
+    name = db.Column(db.String(64), unique=True, nullable=False)
+    _password = db.Column("password", db.String(128), nullable=False)
+    email = db.Column(db.String(128), unique=True)
     create_time = db.Column(
         db.DateTime, nullable=False, server_default=db.func.current_timestamp()
     )
@@ -45,7 +45,7 @@ class Post(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     author_id = db.Column(db.ForeignKey(User.id), nullable=False)
-    title = db.Column(db.String(200), nullable=False)
+    title = db.Column(db.String(256), nullable=False)
     body = db.Column(db.Text, nullable=False)
     create_time = db.Column(
         db.DateTime, nullable=False, server_default=db.func.current_timestamp()

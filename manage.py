@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from flask_migrate import Migrate, MigrateCommand
-from flask_script import Manager
 
-from ggjjl1 import database, create_app
+from flask import Flask
+from flask_script import Manager
+from flask_migrate import Migrate, MigrateCommand
+from ggjjl1 import create_app
+from ggjjl1.database import db
 
 app = create_app()
-
-db = database.db
 migrate = Migrate(app, db)
 
 manager = Manager(app)

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}
+    编辑... | {{ post.title }}
+{% endblock %}
+
+{% block content %}
+    <div class="container vertical-gap20">
+        <form method="post">
+            <div class="form-group">
+                <label for="title">标题</label>
+                <input type="text" class="form-control" name="title" id="title"
+                       value="{{ request.form['title'] or post['title'] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="body">正文</label>
+                <textarea class="form-control" name="body" id="body"
+                          rows="5">{{ request.form['body'] or post['body'] }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">更新</button>
+            <button type="button" class="btn btn-danger" id="btn-delete">删除</button>
+        </form>
+    </div>
+    <script>
+        $(function () {
+            $("#btn-delete").click(function () {
+                    if (confirm("确定删除?")) {
+                       $.ajax({
+                           type: 'POST',
+                           url: '{{ url_for('blog.delete', post_id=post['id']) }}',
+                           data: {
+                               post_id: '{{ post['id'] }}'
+                           },
+                           success: function (data) {
+                               window.location.href = "{{ url_for('blog.index') }}";
+                           },
+                           error: function () {
+
+                           }
+                       });
+                    }
+                }
+            );
+        });
+    </script>
+{% endblock %}

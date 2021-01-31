@@ -5,14 +5,15 @@ import functools
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for
 )
-from werkzeug.exceptions import abort
 from jinja2 import TemplateNotFound
+from werkzeug.exceptions import abort
 
+from ggjjl1 import settings
 from ggjjl1.database import db
 from ggjjl1.models import Post
-from ggjjl1 import settings
 
 bp = Blueprint('blog', __name__)
+title = settings.SITE_NAME
 
 
 def login_required(view):
@@ -38,9 +39,9 @@ def index():
         abort(404)
 
 
-@bp.route('/post/<int:id>')
-def detail(id):
-    post = Post.query.filter(Post.id == id).first()
+@bp.route('/post/<int:post_id>')
+def detail(post_id):
+    post = Post.query.filter(Post.id == post_id).first()
 
     return render_template(
         'blog/detail.html',
@@ -72,10 +73,44 @@ def create():
     )
 
 
-@bp.route("/api")
-def test_api():
+@bp.route("/<int:post_id>/update", methods=("POST", "GET"))
+@login_required
+def update(post_id):
+    post = Post.query.filter(Post.id == post_id).first()
+
+    if request.method == "POST":
+        title = request.form['title']
+        body = request.form['body']
+        error = None
+
+        if not title:
+            error = "Title is required."
+
+        if error is not None:
+            flash(error)
+        else:
+            post.title = title
+            post.body = body
+            db.session.commit()
+            return redirect(url_for("blog.index"))
+
+    return render_template("blog/update.html", post=post)
+
+
+@bp.route("/<int:post_id>/delete", methods=["POST", ])
+@login_required
+def delete(post_id):
+    post = Post.query.filter(Post.id == post_id).first()
+    db.session.delete(post)
+    db.session.commit()
+
+    return redirect(url_for("blog.index"))
+
+
+@bp.route('/about')
+def about():
     return {
-        "username": "Tim",
-        "theme": "default",
-        "image": "http://ggjjl1.com/test-image001.jpg",
+        "name": "Tim",
+        "age": 20,
+        "gender": "Male"
     }

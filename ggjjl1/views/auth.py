@@ -3,7 +3,7 @@
 
 import functools
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for
+    Blueprint, flash, g, redirect, render_template, request, session, url_for, escape
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -56,6 +56,7 @@ def login():
             error = '密码错误！'
 
         if error is None:
+
             session.clear()
             session['user_id'] = user.id
             return redirect(url_for('index'))
@@ -86,3 +87,8 @@ def login_required(view):
         return view(**kwargs)
 
     return wrapped_view
+
+
+@bp.route('/user/<int:user_id>')
+def show_user_profile(user_id):
+    return 'User ID: %s' % escape(user_id)

@@ -26,6 +26,9 @@ body {
     margin-bottom: 10px;
 }
 
+.content {
+}
+
 .content .text-card {
     width: 100%;
     /*border-style: solid 2px;*/
@@ -38,6 +41,13 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.post-title {
+    color: #c82333;
+    font-family: SimSun, serif;
+    font-size: 36px;
+    text-align: center;
 }
 
 .article-header {
@@ -83,4 +93,8 @@ body {
 .login {
     width: 100%;
     background-color: #ddd;
+}
+
+.create {
+    padding: 15px;
 }
