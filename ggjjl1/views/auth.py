@@ -56,6 +56,7 @@ def login():
             error = '密码错误！'
 
         if error is None:
+
             session.clear()
             session['user_id'] = user.id
             return redirect(url_for('index'))
