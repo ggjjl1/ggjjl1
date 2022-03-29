@@ -98,3 +98,7 @@ body {
 .create {
     padding: 15px;
 }
+
+code {
+    background: #ddd;
+}

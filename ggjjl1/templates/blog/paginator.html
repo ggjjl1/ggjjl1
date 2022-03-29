@@ -2,48 +2,48 @@
 <nav aria-label="Page navigation index" class="vertical-gap20">
     <ul class="pagination justify-content-center">
         {% if pagination.has_prev %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ pagination.prev_num }}" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ pagination.prev_num }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
         {% else %}
-            <li class="page-item disabled">
-                <a class="page-link" href="?page={{ pagination.prev_num }}" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
+        <li class="page-item disabled">
+            <a class="page-link" href="?page={{ pagination.prev_num }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
         {% endif %}
         {% for page in pagination.iter_pages() %}
-            {% if page %}
-                {% if page != pagination.page %}
-                    <li class="page-item"><a class="page-link" href="{{ url_for(endpoint, page=page) }}">{{ page }}</a>
-                    </li>
-                {% else %}
-                    <li class="page-item active" aria-current="page">
+        {% if page %}
+        {% if page != pagination.page %}
+        <li class="page-item"><a class="page-link" href="{{ url_for(endpoint, page=page) }}">{{ page }}</a>
+        </li>
+        {% else %}
+        <li class="page-item active" aria-current="page">
                         <span class="page-link">{{ page }}
                             <span class="sr-only">(current)</span>
                         </span>
-                    </li>
-                {% endif %}
-            {% else %}
-                <li class="page-item disabled">
-                    <span class="ellipsis page-link">…</span>
-                </li>
-            {% endif %}
+        </li>
+        {% endif %}
+        {% else %}
+        <li class="page-item disabled">
+            <span class="ellipsis page-link">…</span>
+        </li>
+        {% endif %}
         {% endfor %}
         {% if pagination.has_next %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ pagination.next_num }}" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ pagination.next_num }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
         {% else %}
-            <li class="page-item disabled">
-                <a class="page-link" href="?page={{ pagination.next_num }}" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
+        <li class="page-item disabled">
+            <a class="page-link" href="?page={{ pagination.next_num }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
         {% endif %}
     </ul>
 </nav>

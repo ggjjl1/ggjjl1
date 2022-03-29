@@ -11,9 +11,12 @@ def reverse_filter(s):
     return s[::-1]
 
 
-def mkdown(s):
+def mkdown(text):
     """
     解析mkdown文本，转化为普通html
     """
-    html = markdown(s)
+    html = markdown(text, extensions=[
+        'markdown.extensions.fenced_code',  # 解析代码块
+        'markdown.extensions.codehilite',  # 代码高亮.codehilite
+    ], safe_mode=True, enable_attributes=False)
     return html

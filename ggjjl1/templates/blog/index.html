@@ -4,21 +4,21 @@
 {% block title %}首页{% endblock %}
 
 {% block content %}
-    <div class="container">
-        {% for post in pagination.items %}
-            <div class="card vertical-gap20">
-                <div class="card-body">
-                    <h3 class="card-title"><a href="/post/{{ post['id'] }}">{{ post['title'] }}</a></h3>
-                    {% autoescape false %}
-                    <p class="card-text">{{ post['body']|mkdown }}</p>
-                    {% endautoescape %}
-                    <p class="card-text">
-                        <small class="text-muted">{{ post['create_time'] }}</small>
-                    </p>
-                </div>
-            </div>
-        {% endfor %}
-        {{ render_pagination(pagination, 'index') }}
+<div class="container">
+    {% for post in pagination.items %}
+    <div class="card vertical-gap20">
+        <div class="card-body">
+            <h3 class="card-title"><a href="/post/{{ post['id'] }}">{{ post['title'] }}</a></h3>
+            {% autoescape false %}
+            <p class="card-text">{{ post['body']|mkdown }}</p>
+            {% endautoescape %}
+            <p class="card-text">
+                <small class="text-muted">{{ post['create_time'] }}</small>
+            </p>
+        </div>
     </div>
+    {% endfor %}
+    {{ render_pagination(pagination, 'index') }}
+</div>
 {% endblock %}
 
