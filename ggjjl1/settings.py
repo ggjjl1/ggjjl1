@@ -8,9 +8,7 @@ import os
 SITE_NAME = "ggjjl1's website"
 
 # 数据库地址
-DATABASE_NAME = 'root'
-DATABASE_PASS = '123456'
-SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:12345678@127.0.0.1:3306/ggjjl1"
+SQLALCHEMY_DATABASE_URI = os.environ.get("DB_URL", "mysql+mysqlconnector://root:123456@127.0.0.1:3306/ggjjl1")
 
 # Flask应用密钥
 SECRET_KEY = os.environ.get("SECRET_KEY", "dev")

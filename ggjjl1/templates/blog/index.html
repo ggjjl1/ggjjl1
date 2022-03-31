@@ -10,7 +10,7 @@
         <div class="card-body">
             <h3 class="card-title"><a href="/post/{{ post['id'] }}">{{ post['title'] }}</a></h3>
             {% autoescape false %}
-            <p class="card-text">{{ post['body']|mkdown|truncate }}</p>
+            <p class="card-text">{{ post['body']|mkdown|striptags|truncate }}</p>
             <a href="/post/{{ post['id'] }}">阅读全文</a>
             {% endautoescape %}
             <p class="card-text">
