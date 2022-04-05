@@ -11,4 +11,4 @@ SITE_NAME = "ggjjl1's website"
 SQLALCHEMY_DATABASE_URI = os.environ.get("DB_URL", "mysql+mysqlconnector://root:123456@127.0.0.1:3306/ggjjl1")
 
 # Flask应用密钥
-SECRET_KEY = os.environ.get("SECRET_KEY", "dev")
+SECRET_KEY = os.environ.get("SECRET_KEY", os.urandom(24).hex())
